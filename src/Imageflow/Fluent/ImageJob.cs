@@ -578,6 +578,23 @@ namespace Imageflow.Fluent
                 image.Dispose();
             }
         }
+    
+        /// <summary>
+        /// Returns dimensions and format of the provided image filename.
+        /// </summary>
+        /// <param name="filename">The file to get image dimensions and format from.</param>
+        /// <returns></returns>
+        public static async Task<ImageInfo> GetImageInfo(string filename)
+            => await GetImageInfo(new BytesSource(File.ReadAllBytes(filename)), CancellationToken.None);
+    
+        /// <summary>
+        /// Returns dimensions and format of the provided image filename.
+        /// </summary>
+        /// <param name="filename">The file to get image dimensions and format from.</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns> 
+        public static async Task<ImageInfo> GetImageInfo(string filename, CancellationToken cancellationToken)
+            => await GetImageInfo(new BytesSource(File.ReadAllBytes(filename)), cancellationToken);
 
         /// <summary>
         /// Returns true if it is likely that Imageflow can decode the given image based on the first 12 bytes of the file. 
